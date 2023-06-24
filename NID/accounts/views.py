@@ -157,8 +157,11 @@ def approve(request):
 def denyApproval(request):
     global cit_id
     citizenship = Citizenship.objects.get(id=cit_id)
-    #doc = Documents.objects.get(citizenship__id =cit_id)
+    doc = Documents.objects.get(citizenship__id =cit_id)
+    doc.natioal_id = None
+    doc.save()
     citizenship.delete()
+    # delete NID too
     #cit = request.session.get('cit')
     return HttpResponseRedirect(reverse('profile-approve'))
 
